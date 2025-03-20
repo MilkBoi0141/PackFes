@@ -4,6 +4,91 @@ Bundler.require
 require "sinatra/reloader" if development?
 require "./models.rb"
 
+enable :sessions
+
+use Rack::Session::Cookie, expire_after: 300
+
+helpers do
+    def logged_in?
+        session[:user_id]
+    end
+end
+
+before do
+    @isAuthed = logged_in?
+end
+
 get '/' do
-  erb :index
+    @posts = Post.order(:created_at)
+    erb :index
+end
+
+get '/signup' do
+    erb :signup
+end
+
+post '/signup' do
+    @user = User.create(name: params[:name], email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation])
+    if @user.persisted?
+        session[:user_id] = @user.id
+        session[:user_name] = @user.name
+        redirect '/'
+    else
+        redirect '/signup'
+    end
+end
+
+get '/signin' do
+    erb :signin
+end
+
+post '/signin' do
+    user = User.find_by(email: params[:email])
+    if user && user.authenticate(params[:password])
+        session[:user_id] = user.id
+        session[:user_name] = user.name
+        redirect '/'
+    else
+        redirect '/signin'
+    end
+end
+
+get '/create_post' do
+    erb :create_post
+end
+
+get '/post_content' do
+    post = Post.create(
+        
+    )
+    redirect '/'
+end
+
+get '/:id/detail' do
+    
+end
+
+post '/post_comment' do
+    
+end
+
+get '/user_page' do
+    erb :user_page
+end
+
+post '/add_mylist' do
+    
+end
+
+get '/search' do
+    
+end
+
+post '/:id/evaluate' do
+    
+end
+
+get '/signout' do
+    session.clear
+    redirect '/'
 end

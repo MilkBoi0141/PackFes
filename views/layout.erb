@@ -1,17 +1,23 @@
-
-
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Z</title>
-  <%# fontを適応 %>
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="shortcut icon" href="img/favicon.ico"> 
-</head>
-<body>
-  
-</body>
+	<head>
+		<meta charset="UTF-8">
+		<title>PackFes</title>
+		<link rel="stylesheet" href="/css/style.css">
+		<link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+	<body>
+		<nav class="center-horizontal">
+			<a href="/">PackFes</a>
+			<% if session[:user_id] %>
+			<a href="/user_page">Mypage</a>
+			<a href="/signout">Sign out</a>
+			<% else %>
+			<a href="/signin">Sign in</a>
+			<% end %>
+		</nav>
+
+		<main>
+			<%= yield %>
+		</main>
+	</body>
 </html>

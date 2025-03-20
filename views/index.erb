@@ -1,0 +1,20 @@
+<section class="center-vertical">
+	<% if @posts.any? %>
+	<h1>最新の投稿</h1>
+		<% @posts.each do |post| %>
+		<div class="post center-vertical">
+		    
+		</div>
+		<% end %>
+	<% else %>
+	<p>投稿がありません</p>
+	<% end %>
+</section>
+
+<% if session[:user_id] %>
+<a href="/create_post">
+  <div class="create-post">
+    <p>新規投稿</p>
+  </div>
+</a>
+<% end %>
