@@ -1,0 +1,11 @@
+default_env: &default
+  adapter: postgresql
+  encoding: unicode
+  database: s_packfes
+
+
+development:
+  <<: *default
+
+production:
+  <<: *default
