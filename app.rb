@@ -54,14 +54,32 @@ post '/signin' do
 end
 
 get '/create_post' do
+    @items = session[:items] || []
     erb :create_post
 end
 
-get '/post_content' do
-    post = Post.create(
-        
-    )
-    redirect '/'
+post '/add_item' do
+    session[:items] ||= []
+    session[:items] << {"name" => params[:name], "amount" => params[:amount], "detail" => params[:detail]}
+    redirect '/create_post'
+end
+
+post '/post_content' do
+  post = Post.create(
+    title: params[:title],
+    detail: params[:detail],
+    is_owned: true,
+    user_id: session[:user_id]
+  )
+
+  if session[:items]
+    session[:items].each do |item_data|
+      post.items.create(name: item_data["name"], amount: item_data["amount"].to_i, detail: item_data["detail"], post_id: post.id)
+    end
+  end
+
+  session[:items] = nil
+  redirect '/'
 end
 
 get '/:id/detail' do

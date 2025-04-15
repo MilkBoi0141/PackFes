@@ -1,20 +1,35 @@
 <section class="center-vertical">
-	<% if @posts.any? %>
-	<h1>最新の投稿</h1>
-		<% @posts.each do |post| %>
-		<div class="post center-vertical">
-		    
-		</div>
-		<% end %>
-	<% else %>
-	<p>投稿がありません</p>
-	<% end %>
+  <% if @posts.any? %>
+    <h1>最新の投稿</h1>
+    <% @posts.each do |post| %>
+      <div class="post center-vertical">
+        <h3><%= post.title %></h3>
+        <p><%= post.detail %></p>
+        <% if post.items.any? %>
+          <div class="items">
+            <h4>アイテム一覧</h4>
+            <ul>
+              <% post.items.each do |item| %>
+                <li>
+			          	<strong><%= item.name %></strong>（<%= item.amount %>個）詳細：<%= item.detail %>
+			          </li>
+              <% end %>
+            </ul>
+          </div>
+        <% else %>
+          <p>アイテムなし</p>
+        <% end %>
+      </div>
+    <% end %>
+  <% else %>
+    <p>投稿がありません</p>
+  <% end %>
 </section>
 
 <% if session[:user_id] %>
-<a href="/create_post">
-  <div class="create-post">
-    <p>新規投稿</p>
-  </div>
-</a>
+  <a href="/create_post">
+    <div class="create-post">
+      <p>新規投稿</p>
+    </div>
+  </a>
 <% end %>
