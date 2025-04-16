@@ -84,7 +84,6 @@ post '/post_content' do
         post = Post.create(
             title: params[:title],
             detail: params[:detail],
-            is_owned: true,
             user_id: session[:user_id]
         )
 
@@ -113,8 +112,53 @@ post '/post_comment' do
     
 end
 
+post '/posts/:id/like' do
+    post = Post.find(params[:id])
+    if logged_in?
+        unless Like.exists?(user_id: session[:user_id], post_id: post.id)
+            Like.create(user_id: session[:user_id], post_id: post.id)
+        end
+    end
+    redirect '/'
+end
+
+post '/posts/:id/unlike' do
+    post = Post.find(params[:id])
+        if logged_in?
+            like = Like.find_by(user_id: session[:user_id], post_id: post.id)
+            like&.destroy
+        end
+    redirect '/'
+end
+
+post '/posts/:id/add_mylist' do
+    post = Post.find(params[:id])
+    if logged_in?
+        unless Mylist.exists?(user_id: session[:user_id], post_id: post.id)
+            Mylist.create(user_id: session[:user_id], post_id: post.id)
+        end
+    end
+    redirect '/'
+end
+
+post '/posts/:id/remove_mylist' do
+    post = Post.find(params[:id])
+        if logged_in?
+            mylist = Mylist.find_by(user_id: session[:user_id], post_id: post.id)
+            mylist&.destroy
+        end
+    redirect '/'
+end
+
 get '/user_page' do
-    erb :user_page
+    unless session[:user_id]
+        redirect '/signin' 
+    else
+        @user = User.find(session[:user_id])
+        @liked_posts = @user.liked_posts
+        @saved_posts = @user.mylists.includes(post: :items).map(&:post)
+        erb :user_page
+    end
 end
 
 post '/add_mylist' do

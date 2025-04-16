@@ -199,8 +199,8 @@ nav {
   text-decoration: none;
 }
 
-/* ===== フォーム全般 ===== */
-form {
+/* =================== 投稿用フォーム =================== */
+.standard-form {
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -210,20 +210,20 @@ form {
   border-radius: 12px;
   box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.08);
   margin-top: 20px;
-  width: 500px;
+  width: 400px;
 }
 
-form input[type="text"],
-form input[type="number"],
-form input[type="password"],
-form input[type="submit"] {
+.standard-form input[type="text"],
+.standard-form input[type="number"],
+.standard-form input[type="password"],
+.standard-form input[type="submit"] {
   padding: 12px;
   font-size: 1em;
   border: 1px solid #ccc;
   border-radius: 8px;
 }
 
-form input[type="submit"] {
+.standard-form input[type="submit"] {
   background-color: #d94f30;
   color: white;
   font-weight: bold;
@@ -231,7 +231,7 @@ form input[type="submit"] {
   transition: background-color 0.3s ease;
 }
 
-form input[type="submit"]:hover {
+.standard-form input[type="submit"]:hover {
   background-color: #bb3e1f;
 }
 
@@ -254,7 +254,7 @@ input[disabled] {
   border-radius: 16px;
   padding: 25px;
   width: 90%;
-  max-width: 500px;
+  max-width: 700px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.04);
 }
 
@@ -274,4 +274,88 @@ input[disabled] {
   font-size: 0.9em;
   color: #777;
   margin-bottom: 10px;
+}
+
+/* =================== いいねボタン用フォーム =================== */
+.like-form {
+  margin-top: 10px;
+}
+
+.like-button {
+  background-color: transparent;
+  color: #d94f30;
+  border: 1px solid #f3b664;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 0.95em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.like-button:hover {
+  background-color: #fff7e6;
+  color: #bb3e1f;
+  border-color: #ffbc84;
+}
+
+.like-count {
+  text-align: right;
+  font-size: 0.9em;
+  color: #888;
+  margin-top: 8px;
+}
+
+.button-grid {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+
+/* ======= ユーザーページ周り======= */
+.user-profile {
+  padding: 40px 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.user-profile h1 {
+  font-size: 1.8em;
+  color: #d94f30;
+  margin-bottom: 20px;
+}
+
+.user-stats {
+  font-size: 1em;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+.user-section {
+  margin-top: 40px;
+}
+
+.user-section h2 {
+  color: #d94f30;
+  margin-bottom: 12px;
+}
+
+.user-post-card {
+  background-color: #fff7e6;
+  border: 1px solid #f3b664;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 1px 1px 5px rgba(0,0,0,0.05);
+}
+
+.user-post-card h3 {
+  color: #d94f30;
+  margin: 0 0 5px;
+}
+
+.user-post-card p {
+  font-size: 0.9em;
+  color: #555;
 }

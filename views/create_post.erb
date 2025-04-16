@@ -27,7 +27,7 @@
 
     <section class="section-box item-form">
       <h3>アイテムを追加</h3>
-      <form action="/add_item" method="POST">
+      <form action="/add_item" method="POST" class="standard-form">
         <input type="text" name="name" placeholder="アイテム名（例：タオル）" required>
         <input type="number" name="amount" placeholder="個数（例：1）" required>
         <input type="text" name="detail" placeholder="詳細（例：汗拭き用）">
@@ -40,7 +40,7 @@
       <p class="note-text">
         <%= @items.any? ? "アイテムが追加されました！投稿できます 🎉" : "※ アイテムが1つ以上追加されると投稿できます" %>
       </p>
-      <form action="/post_content" method="POST">
+      <form action="/post_content" method="POST" class="standard-form">
         <input type="text" name="title" placeholder="投稿のタイトル（例：ロックフェス用）" required>
         <input type="text" name="detail" placeholder="投稿の詳細（例：2泊3日の準備）">
         <input type="submit" value="この内容で投稿する" <% unless @items.any? %>disabled style="opacity:0.5; cursor:not-allowed;"<% end %>>

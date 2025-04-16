@@ -20,9 +20,22 @@
               <% end %>
             </div>
           </div>
-        <% else %>
-          <p>アイテムなし</p>
         <% end %>
+        <% if session[:user_id] %>
+        <div class="button-grid">
+          <form action="/posts/<%= post.id %>/<%= post.likes.find_by(user_id: session[:user_id]) ? "unlike" : "like" %>" method="post" class="like-form">
+            <button type="submit" class="like-button">
+              <%= post.likes.find_by(user_id: session[:user_id]) ? "♥ いいね解除" : "♡ いいね" %>
+            </button>
+          </form>
+          <form action="/posts/<%= post.id %>/<%= post.mylists.find_by(user_id: session[:user_id]) ? "remove_mylist" : "add_mylist" %>" method="post" class="like-form">
+            <button type="submit" class="like-button">
+              <%= post.mylists.find_by(user_id: session[:user_id]) ? "保存解除" : "保存する" %>
+            </button>
+          </form>
+        </div>
+        <% end %>
+        <p class="like-count">♥ <%= post.likes.count %> 件</p>
       </div>
     <% end %>
   <% else %>
