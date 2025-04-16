@@ -1,4 +1,8 @@
 <section class="center-vertical">
+  <form action="/search" method="get" class="search-form">
+    <input type="text" name="q" placeholder="投稿を検索..." required>
+    <input type="submit" value="検索">
+  </form>
   <% if @posts.any? %>
     <h1>最新の投稿</h1>
     <% @posts.each do |post| %>

@@ -368,3 +368,31 @@ input[disabled] {
   font-size: 0.9em;
   color: #555;
 }
+
+/*===== 検索フォーム =====*/
+.search-form {
+  display: flex;
+  gap: 8px;
+  margin: 20px auto;
+  justify-content: center;
+}
+
+.search-form input[type="text"] {
+  padding: 10px;
+  width: 300px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.search-form input[type="submit"] {
+  padding: 10px 16px;
+  background-color: #ff914d;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.search-form input[type="submit"]:hover {
+  background-color: #ff6f1d;
+}

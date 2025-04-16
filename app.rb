@@ -44,6 +44,7 @@ post '/signup' do
     end
 end
 
+
 get '/signin' do
     erb :signin
 end
@@ -163,7 +164,13 @@ get '/user_page' do
 end
 
 get '/search' do
-    
+  keyword = params[:q]
+  if keyword && !keyword.empty?
+    @posts = Post.where("title ILIKE ? OR detail ILIKE ?", "%#{keyword}%", "%#{keyword}%").order(:created_at)
+  else
+    @posts = []
+  end
+  erb :search
 end
 
 get '/signout' do

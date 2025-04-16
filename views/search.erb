@@ -1,0 +1,30 @@
+<section class="center-vertical">
+    <h1>「<%= params[:q] %>」の検索結果</h1>
+    <% if @posts.any? %>
+      <% @posts.each do |post| %>
+        <div class="post center-vertical">
+          <h3><%= post.title %></h3>
+          <p><%= post.detail %></p>
+    
+          <% if post.items.any? %>
+            <div class="items">
+              <h4>アイテム一覧</h4>
+              <div class="item-grid">
+                <% post.items.each do |item| %>
+                  <div class="item-card">
+                    <div class="item-name"><%= item.name %></div>
+                    <div class="item-info">
+                      <span><%= item.amount %>個</span> |
+                      <span><%= item.detail %></span>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% else %>
+      <p>該当する投稿は見つかりませんでした。</p>
+    <% end %>
+</section>
