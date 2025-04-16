@@ -96,7 +96,6 @@ post '/post_content' do
                   post_id: post.id
             )
         end
-        redirect '/'
     else 
         redirect '/create_post'
     end
@@ -106,10 +105,6 @@ post '/post_content' do
 end
 
 get '/:id/detail' do
-    
-end
-
-post '/post_comment' do
     
 end
 
