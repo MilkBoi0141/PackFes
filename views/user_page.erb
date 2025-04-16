@@ -2,8 +2,8 @@
   <h1>ようこそ、<%= @user.name %> さん！</h1>
 
   <div class="user-stats">
-    <p>♥ いいねした投稿数：<%= @liked_posts.count %> 件</p>
-    <p>📌 保存した投稿数：<%= @saved_posts.count %> 件</p>
+    <p>いいねした投稿数：<%= @liked_posts.count %> 件</p>
+    <p>保存した投稿数：<%= @saved_posts.count %> 件</p>
   </div>
 
   <hr>
@@ -35,6 +35,36 @@
             <% end %>
         <% else %>
           <p>保存した投稿はまだありません。</p>
+        <% end %>
+    </div>
+    
+    <div class="user-section">
+        <h2>👦 自分の投稿一覧</h2>
+        <% if @myposts.any? %>
+            <% @myposts.each do |post| %>
+            <div class="user-post-card">
+                <h3><%= post.title %></h3>
+                <p><%= post.detail %></p>
+                <% if post.items.any? %>
+                    <div class="items">
+                        <h4>アイテム一覧</h4>
+                        <div class="item-grid">
+                        <% post.items.each do |item| %>
+                          <div class="item-card">
+                            <div class="item-name"><%= item.name %></div>
+                            <div class="item-info">
+                              <span><%= item.amount %>個</span> |
+                              <span><%= item.detail %></span>
+                            </div>
+                          </div>
+                        <% end %>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+            <% end %>
+        <% else %>
+          <p>投稿はまだありません。</p>
         <% end %>
     </div>
 </section>

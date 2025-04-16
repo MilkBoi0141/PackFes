@@ -157,19 +157,12 @@ get '/user_page' do
         @user = User.find(session[:user_id])
         @liked_posts = @user.liked_posts
         @saved_posts = @user.mylists.includes(post: :items).map(&:post)
+        @myposts = @user.posts
         erb :user_page
     end
 end
 
-post '/add_mylist' do
-    
-end
-
 get '/search' do
-    
-end
-
-post '/:id/evaluate' do
     
 end
 

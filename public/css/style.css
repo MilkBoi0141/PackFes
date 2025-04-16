@@ -18,7 +18,7 @@ a {
 }
 
 a:hover {
-  text-decoration: underline;
+  color: #ff914d;
 }
 
 hr {
@@ -57,6 +57,11 @@ nav {
   font-size: 1.5em;
   font-weight: bold;
   color: white;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.logo a:hover {
+  color: #ff6f1d;
 }
 
 .nav-links a {
@@ -88,25 +93,31 @@ nav {
 
 .center-vertical {
   flex-direction: column;
-  padding: 20px;
 }
 
 /* ===== 投稿カード（トップ画面） ===== */
 .post {
-  background-color: #fff;
-  border: 2px solid #f3b664;
+  background-color: #fff7e6;
+  border: 1px solid #f3b664;
   border-radius: 10px;
-  padding: 20px;
-  margin: 15px 0;
-  width: 90%;
-  max-width: 600px;
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  padding: 10px;
+  width: 600px;
+  box-shadow: 1px 1px 5px rgba(0,0,0,0.05);
+}
+
+.post h3 { 
+  margin: 0.3em
+}
+
+.post p {
+  margin: 0.1em;
 }
 
 .items {
   background-color: #fff7e6;
   width: 90%;
-  padding: 15px;
+  padding: 10px;
   border-radius: 12px;
   margin-top: 10px;
 }
@@ -115,7 +126,6 @@ nav {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 10px;
 }
 
 .item-card {
@@ -281,22 +291,21 @@ input[disabled] {
   margin-top: 10px;
 }
 
-.like-button {
-  background-color: transparent;
-  color: #d94f30;
-  border: 1px solid #f3b664;
-  border-radius: 20px;
-  padding: 6px 14px;
-  font-size: 0.95em;
-  font-weight: bold;
+.icon-button {
+  background: none;
+  border: none;
+  padding: 0;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform 0.1s ease;
 }
 
-.like-button:hover {
-  background-color: #fff7e6;
-  color: #bb3e1f;
-  border-color: #ffbc84;
+.icon-button:hover {
+  transform: scale(1.1);
+}
+
+.icon-img {
+  width: 28px;
+  height: 28px;
 }
 
 .like-count {

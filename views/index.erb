@@ -24,13 +24,13 @@
         <% if session[:user_id] %>
         <div class="button-grid">
           <form action="/posts/<%= post.id %>/<%= post.likes.find_by(user_id: session[:user_id]) ? "unlike" : "like" %>" method="post" class="like-form">
-            <button type="submit" class="like-button">
-              <%= post.likes.find_by(user_id: session[:user_id]) ? "♥ いいね解除" : "♡ いいね" %>
+            <button type="submit" class="icon-button">
+              <img src="/img/<%= post.likes.find_by(user_id: session[:user_id]) ? "heart_on" : "heart_off" %>.png" alt="いいね" class="icon-img">
             </button>
           </form>
           <form action="/posts/<%= post.id %>/<%= post.mylists.find_by(user_id: session[:user_id]) ? "remove_mylist" : "add_mylist" %>" method="post" class="like-form">
-            <button type="submit" class="like-button">
-              <%= post.mylists.find_by(user_id: session[:user_id]) ? "保存解除" : "保存する" %>
+            <button type="submit" class="icon-button">
+              <img src="/img/<%= post.mylists.find_by(user_id: session[:user_id]) ? "save_on" : "save_off" %>.png" alt="保存" class="icon-img">
             </button>
           </form>
         </div>
