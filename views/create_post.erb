@@ -1,37 +1,51 @@
 <div class="center-horizontal">
-  <div class="center-vertical">
-    <h1>投稿作成</h1>
+  <div class="create-container">
 
-    <h2>追加されたアイテム一覧</h2>
-    <% if @items.any? %>
-      <ul>
-        <% @items.each do |item| %>
-          <li>
-            <%= item["name"] %>（<%= item["amount"] %>個）詳細：<%= item["detail"] %>
-          </li>
-        <% end %>
-      </ul>
-    <% else %>
-      <p>まだアイテムは追加されていません。</p>
-    <% end %>
+    <h1>フェス持ち物リストを投稿しよう</h1>
 
-    <hr>
+    <section class="section-box item-preview">
+      <h2>現在の持ち物リスト</h2>
+      <% if @items.any? %>
+        <div class="item-grid">
+          <% @items.each_with_index do |item, index| %>
+            <div class="item-card">
+              <div class="item-name"><%= item["name"] %></div>
+              <div class="item-info">
+                <span><%= item["amount"] %>個</span> |
+                <span><%= item["detail"] %></span>
+              </div>
+              <form action="/delete_item/<%= index %>" method="POST" class="delete-inline-form">
+                <button type="submit" class="delete-inline-button">削除</button>
+              </form>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <p class="warning-text">※ まだアイテムが追加されていません</p>
+      <% end %>
+    </section>
 
-    <form action="/add_item" method="POST">
+    <section class="section-box item-form">
       <h3>アイテムを追加</h3>
-      <input type="text" name="name" placeholder="アイテム名" required>
-      <input type="number" name="amount" placeholder="個数" required>
-      <input type="text" name="detail" placeholder="詳細">
-      <input type="submit" value="追加">
-    </form>
+      <form action="/add_item" method="POST">
+        <input type="text" name="name" placeholder="アイテム名（例：タオル）" required>
+        <input type="number" name="amount" placeholder="個数（例：1）" required>
+        <input type="text" name="detail" placeholder="詳細（例：汗拭き用）">
+        <input type="submit" value="アイテムを追加する">
+      </form>
+    </section>
 
-    <hr>
+    <section class="section-box post-form">
+      <h3>投稿内容を入力</h3>
+      <p class="note-text">
+        <%= @items.any? ? "アイテムが追加されました！投稿できます 🎉" : "※ アイテムが1つ以上追加されると投稿できます" %>
+      </p>
+      <form action="/post_content" method="POST">
+        <input type="text" name="title" placeholder="投稿のタイトル（例：ロックフェス用）" required>
+        <input type="text" name="detail" placeholder="投稿の詳細（例：2泊3日の準備）">
+        <input type="submit" value="この内容で投稿する" <% unless @items.any? %>disabled style="opacity:0.5; cursor:not-allowed;"<% end %>>
+      </form>
+    </section>
 
-    <form action="/post_content" method="POST">
-      <h3>投稿の情報を入力</h3>
-      <input type="text" name="title" placeholder="タイトル" required>
-      <input type="text" name="detail" placeholder="投稿の詳細">
-      <input type="submit" value="投稿を確定">
-    </form>
   </div>
 </div>

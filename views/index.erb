@@ -8,13 +8,17 @@
         <% if post.items.any? %>
           <div class="items">
             <h4>アイテム一覧</h4>
-            <ul>
+            <div class="item-grid">
               <% post.items.each do |item| %>
-                <li>
-			          	<strong><%= item.name %></strong>（<%= item.amount %>個）詳細：<%= item.detail %>
-			          </li>
+                <div class="item-card">
+                  <div class="item-name"><%= item.name %></div>
+                  <div class="item-info">
+                    <span><%= item.amount %>個</span> |
+                    <span><%= item.detail %></span>
+                  </div>
+                </div>
               <% end %>
-            </ul>
+            </div>
           </div>
         <% else %>
           <p>アイテムなし</p>
@@ -27,9 +31,7 @@
 </section>
 
 <% if session[:user_id] %>
-  <a href="/create_post">
-    <div class="create-post">
-      <p>新規投稿</p>
-    </div>
+  <a href="/create_post" class="fab-post-button">
+    ＋
   </a>
 <% end %>

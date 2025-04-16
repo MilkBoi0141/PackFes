@@ -28,7 +28,13 @@ get '/signup' do
 end
 
 post '/signup' do
-    @user = User.create(name: params[:name], email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation])
+    @user = User.create(
+        name: params[:name],
+        email: params[:email],
+        password: params[:password],
+        password_confirmation: params[:password_confirmation]
+    )
+    
     if @user.persisted?
         session[:user_id] = @user.id
         session[:user_name] = @user.name
@@ -60,26 +66,43 @@ end
 
 post '/add_item' do
     session[:items] ||= []
-    session[:items] << {"name" => params[:name], "amount" => params[:amount], "detail" => params[:detail]}
+    session[:items] << {
+        "name" => params[:name], 
+        "amount" => params[:amount], 
+        "detail" => params[:detail]
+    }
     redirect '/create_post'
 end
 
+post '/delete_item/:index' do
+  session[:items]&.delete_at(params[:index].to_i)
+  redirect '/create_post'
+end
+
 post '/post_content' do
-  post = Post.create(
-    title: params[:title],
-    detail: params[:detail],
-    is_owned: true,
-    user_id: session[:user_id]
-  )
+    if session[:items]
+        post = Post.create(
+            title: params[:title],
+            detail: params[:detail],
+            is_owned: true,
+            user_id: session[:user_id]
+        )
 
-  if session[:items]
-    session[:items].each do |item_data|
-      post.items.create(name: item_data["name"], amount: item_data["amount"].to_i, detail: item_data["detail"], post_id: post.id)
+        session[:items].each do |item_data|
+            post.items.create(
+                  name: item_data["name"],
+                  amount: item_data["amount"].to_i,
+                  detail: item_data["detail"],
+                  post_id: post.id
+            )
+        end
+        redirect '/'
+    else 
+        redirect '/create_post'
     end
-  end
-
-  session[:items] = nil
-  redirect '/'
+    
+    session[:items] = nil
+    redirect '/'
 end
 
 get '/:id/detail' do

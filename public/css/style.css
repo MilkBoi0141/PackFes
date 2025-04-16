@@ -1,61 +1,277 @@
-* {
-    margin: 0;
-    padding: 0;
+/* ===== 全体・共通スタイル ===== */
+body {
+  font-family: 'Righteous', 'Helvetica Neue', sans-serif;
+  background-color: #fffaf3;
+  color: #333;
+  margin: 0;
+  padding: 0;
 }
 
+h1, h2, h3, h4 {
+  color: #d94f30;
+  margin-bottom: 0.5em;
+}
+
+a {
+  color: #ff6f1d;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background-color: #f3b664;
+  margin: 30px 0;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+li {
+  margin: 5px 0;
+}
+
+/* ===== ナビゲーション ===== */
 nav {
-    height: 70px;
-    width: 100%;
-    background-color: rgb(70, 69, 69);
+  background-color: #ff914d;
+  padding: 12px 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-nav a {
-    color: white;
-    text-decoration: none;
-    margin-left: 15px;
+.nav-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-input {
-    margin: 10px;
+.logo a {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: white;
 }
 
-.post {
-    margin: 20px;
-    padding: 10px;
-    width: 400px;
-    border-radius: 5px;
-    word-break: break-all;
-    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.4);
-  }
-  
-  .create-post {
-  position: fixed;
-  bottom: 100px;
-  right: 100px;
-  width: 100px;
-  height: 100px;
-  line-height:70px;
-  color:white;
-  background: gray;
-  border-radius: 50%;
-  text-align: center;
+.nav-links a {
+  margin-left: 20px;
+  background-color: white;
+  color: #ff914d;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.95em;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-
-.create-post p {
-  font-size: 20px;
-  margin-top: 15px;
+.nav-links a:hover {
+  background-color: #ff6f1d;
+  color: white;
 }
 
-.center-vertical {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+/* ===== レイアウトユーティリティ ===== */
+.center-horizontal, .center-vertical {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .center-horizontal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.center-vertical {
+  flex-direction: column;
+  padding: 20px;
+}
+
+/* ===== 投稿カード（トップ画面） ===== */
+.post {
+  background-color: #fff;
+  border: 2px solid #f3b664;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 15px 0;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.items {
+  background-color: #fff7e6;
+  width: 90%;
+  padding: 15px;
+  border-radius: 12px;
+  margin-top: 10px;
+}
+
+.item-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.item-card {
+  background-color: white;
+  border: 1px solid #f3b664;
+  border-radius: 10px;
+  padding: 10px 15px;
+  min-width: 120px;
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.05);
+}
+
+.item-name {
+  font-weight: bold;
+  color: #d94f30;
+  margin-bottom: 4px;
+}
+
+.item-info {
+  font-size: 0.85em;
+  color: #555;
+}
+
+.delete-inline-form {
+  all: unset;
+  display: inline;
+}
+
+.delete-inline-button {
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 0.85em;
+  padding: 2px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.delete-inline-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #d94f30;
+}
+
+/* ===== 新規投稿ボタン ===== */
+.create-post {
+  background-color: #ff914d;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  padding: 15px 25px;
+  margin: 30px auto;
+  width: 200px;
+  border-radius: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+.create-post:hover {
+  background-color: #ff6f1d;
+}
+
+.fab-post-button {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  width: 78px;
+  height: 78px;
+  background-color: #ff914d;
+  color: white;
+  font-size: 40px;
+  line-height: 78px;
+  text-align: center;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  z-index: 1000;
+  transition: background-color 0.2s ease;
+}
+
+.fab-post-button:hover {
+  background-color: #ff6f1d;
+  text-decoration: none;
+}
+
+/* ===== フォーム全般 ===== */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: #fff;
+  padding: 20px;
+  border: 2px solid #ffbc84;
+  border-radius: 12px;
+  box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.08);
+  margin-top: 20px;
+  width: 500px;
+}
+
+form input[type="text"],
+form input[type="number"],
+form input[type="password"],
+form input[type="submit"] {
+  padding: 12px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+form input[type="submit"] {
+  background-color: #d94f30;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form input[type="submit"]:hover {
+  background-color: #bb3e1f;
+}
+
+input[disabled] {
+  background-color: #ddd;
+  color: #888;
+}
+
+/* ===== 投稿作成画面レイアウト ===== */
+.create-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.section-box {
+  background-color: #fff;
+  border: 2px solid #ffd5a1;
+  border-radius: 16px;
+  padding: 25px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.04);
+}
+
+.section-box h2,
+.section-box h3 {
+  margin-top: 0;
+  color: #d94f30;
+}
+
+.warning-text {
+  color: #d94f30;
+  font-weight: bold;
+  font-size: 0.95em;
+}
+
+.note-text {
+  font-size: 0.9em;
+  color: #777;
+  margin-bottom: 10px;
 }
