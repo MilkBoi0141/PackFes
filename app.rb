@@ -19,8 +19,8 @@ before do
 end
 
 get '/' do
-    @posts = Post.order(:created_at)
-    erb :index
+  @posts = Post.order(created_at: :desc)
+  erb :index
 end
 
 get '/signup' do
@@ -102,10 +102,6 @@ post '/post_content' do
     
     session[:items] = nil
     redirect '/'
-end
-
-get '/:id/detail' do
-    
 end
 
 post '/posts/:id/like' do
