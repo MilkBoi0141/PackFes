@@ -13,9 +13,9 @@ html, body {
 main {
   flex: 1;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 40px 20px;
+  padding: 0px 20px;
   box-sizing: border-box;
 }
 
@@ -67,6 +67,13 @@ li {
 
 .center-vertical {
   flex-direction: column;
+}
+
+.post-listing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 /*ナビゲーション*/
@@ -195,23 +202,6 @@ nav {
 }
 
 /* ===== 新規投稿ボタン ===== */
-.create-post {
-  background-color: #ff914d;
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  padding: 15px 25px;
-  margin: 30px auto;
-  width: 200px;
-  border-radius: 30px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease;
-}
-
-.create-post:hover {
-  background-color: #ff6f1d;
-}
-
 .fab-post-button {
   position: fixed;
   bottom: 50px;
@@ -230,7 +220,8 @@ nav {
 }
 
 .fab-post-button:hover {
-  background-color: #ff6f1d;
+  background-color: #fff;
+  color: #ff914d;
   text-decoration: none;
 }
 
@@ -440,6 +431,18 @@ input[disabled] {
 }
 
 /*検索*/
+.search-bar-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 20px 0 10px;
+  background-color: #fffaf3;
+  border-bottom: 1px solid #f3b664;
+  position: relative;
+  top: 0;
+  z-index: 900;
+}
+
 .search-form {
   display: flex;
   gap: 8px;
