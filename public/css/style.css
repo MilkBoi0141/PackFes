@@ -1,10 +1,22 @@
-/* ===== 全体・共通スタイル ===== */
-body {
+/*===== 共通スタイル =====*/
+html, body {
+  height: 100%;
   font-family: 'Righteous', 'Helvetica Neue', sans-serif;
   background-color: #fffaf3;
   color: #333;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  box-sizing: border-box;
 }
 
 h1, h2, h3, h4 {
@@ -36,50 +48,6 @@ li {
   margin: 5px 0;
 }
 
-/* ===== ナビゲーション ===== */
-nav {
-  background-color: #ff914d;
-  padding: 12px 0;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.nav-container {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 0 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo a {
-  font-size: 1.5em;
-  font-weight: bold;
-  color: white;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.logo a:hover {
-  color: #ff6f1d;
-}
-
-.nav-links a {
-  margin-left: 20px;
-  background-color: white;
-  color: #ff914d;
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 0.95em;
-  font-weight: bold;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.nav-links a:hover {
-  background-color: #ff6f1d;
-  color: white;
-}
-
 /* ===== レイアウトユーティリティ ===== */
 .center-horizontal, .center-vertical {
   display: flex;
@@ -95,7 +63,55 @@ nav {
   flex-direction: column;
 }
 
-/* ===== 投稿カード（トップ画面） ===== */
+/*ナビゲーション*/
+nav {
+  background: linear-gradient(90deg, #ff914d, #ff6f1d);
+  padding: 24px 0; /* 高さアップ！ */
+  width: 100%;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-sizing: border-box;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo a {
+  font-size: 2.2em;
+  font-weight: 900;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
+}
+
+.logo a:hover {
+  color: #ffe3ca;
+}
+
+.nav-links a {
+  margin-left: 20px;
+  background-color: white;
+  color: #ff6f1d;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 1em;
+  font-weight: bold;
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-links a:hover {
+  background-color: #ffe3ca;
+  color: #d94f30;
+}
+
+/*ポストデザイン*/
 .post {
   background-color: #fff7e6;
   border: 1px solid #f3b664;
@@ -209,17 +225,15 @@ nav {
   text-decoration: none;
 }
 
-/* =================== 投稿用フォーム =================== */
+/*投稿用フォーム*/
 .standard-form {
   display: flex;
   flex-direction: column;
   gap: 12px;
   background-color: #fff;
   padding: 20px;
-  border: 2px solid #ffbc84;
   border-radius: 12px;
-  box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.08);
-  margin-top: 20px;
+  margin: 20px auto;
   width: 400px;
 }
 
@@ -250,12 +264,11 @@ input[disabled] {
   color: #888;
 }
 
-/* ===== 投稿作成画面レイアウト ===== */
+/*投稿作成画面*/
 .create-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px;
 }
 
 .section-box {
@@ -263,6 +276,7 @@ input[disabled] {
   border: 2px solid #ffd5a1;
   border-radius: 16px;
   padding: 25px;
+  margin: 15px;
   width: 90%;
   max-width: 700px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.04);
@@ -286,7 +300,7 @@ input[disabled] {
   margin-bottom: 10px;
 }
 
-/* =================== いいねボタン用フォーム =================== */
+/*いいね*/
 .like-form {
   margin-top: 10px;
 }
@@ -322,7 +336,7 @@ input[disabled] {
 }
 
 
-/* ======= ユーザーページ周り======= */
+/*ユーザーページ*/
 .user-profile {
   padding: 40px 20px;
   max-width: 800px;
@@ -369,7 +383,7 @@ input[disabled] {
   color: #555;
 }
 
-/*===== 検索フォーム =====*/
+/*検索*/
 .search-form {
   display: flex;
   gap: 8px;
@@ -395,4 +409,39 @@ input[disabled] {
 
 .search-form input[type="submit"]:hover {
   background-color: #ff6f1d;
+}
+
+/*フッター*/
+footer {
+  background-color: #ff914d;
+  color: white;
+  padding: 20px 0;
+  margin-top: 50px;
+  text-align: center;
+  font-size: 0.9em;
+}
+
+.footer-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.footer-links li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.footer-links li a:hover {
+  text-decoration: underline;
 }

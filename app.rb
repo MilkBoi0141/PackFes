@@ -87,6 +87,11 @@ post '/post_content' do
             detail: params[:detail],
             user_id: session[:user_id]
         )
+        
+        tag_ids = params[:tag_ids] || []
+        tag_ids.each do |tag_id|
+          PostsTag.create(post_id: post.id, tag_id: tag_id)
+        end
 
         session[:items].each do |item_data|
             post.items.create(

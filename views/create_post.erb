@@ -4,6 +4,9 @@
     
     <section class="section-box item-preview">
       <h2>現在の持ち物リスト</h2>
+      <% if !@items.any? %>
+        <p>アイテムを追加しましょう！</p>
+      <% end %>
       <% if @items.any? %>
         <div class="item-grid">
           <% @items.each_with_index do |item, index| %>
@@ -42,6 +45,16 @@
         <input type="text" name="detail" placeholder="投稿の詳細（例：2泊3日の準備）">
         <input type="submit" value="この内容で投稿する" <% unless @items.any? %>disabled style="opacity:0.5; cursor:not-allowed;"<% end %>>
       </form>
+    </section>
+    
+    <section class="section-box post-form">
+      <h3>ジャンルを選択</h3>
+      <% Tag.all.each do |tag| %>
+        <label>
+          <input type="checkbox" name="tag_ids[]" value="<%= tag.id %>">
+          <%= tag.name %>
+        </label>
+      <% end %>
     </section>
   </div>
 </div>
