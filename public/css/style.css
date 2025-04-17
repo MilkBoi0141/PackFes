@@ -24,6 +24,12 @@ h1, h2, h3, h4 {
   margin-bottom: 0.5em;
 }
 
+h1 {
+  font-size: 1.8em;
+  color: #d94f30;
+  margin-bottom: 20px;
+}
+
 a {
   color: #ff6f1d;
   text-decoration: none;
@@ -113,10 +119,10 @@ nav {
 
 /*ポストデザイン*/
 .post {
-  background-color: #fff7e6;
+  background-color: #fefaf3;
   border: 1px solid #f3b664;
   border-radius: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   padding: 10px;
   width: 600px;
   box-shadow: 1px 1px 5px rgba(0,0,0,0.05);
@@ -131,11 +137,15 @@ nav {
 }
 
 .items {
-  background-color: #fff7e6;
+  background-color: #fff2d6;
   width: 90%;
   padding: 10px;
   border-radius: 12px;
   margin-top: 10px;
+}
+
+.items h4 {
+  margin-top: 5px;
 }
 
 .item-grid {
@@ -146,7 +156,6 @@ nav {
 
 .item-card {
   background-color: white;
-  border: 1px solid #f3b664;
   border-radius: 10px;
   padding: 10px 15px;
   min-width: 120px;
@@ -225,7 +234,7 @@ nav {
   text-decoration: none;
 }
 
-/*投稿用フォーム*/
+/*セクションごとデザイン*/
 .standard-form {
   display: flex;
   flex-direction: column;
@@ -278,7 +287,7 @@ input[disabled] {
   padding: 25px;
   margin: 15px;
   width: 90%;
-  max-width: 700px;
+  max-width: 500px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.04);
 }
 
@@ -298,6 +307,59 @@ input[disabled] {
   font-size: 0.9em;
   color: #777;
   margin-bottom: 10px;
+}
+
+/*タグ周り*/
+.tag-select-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.tag-checkbox {
+  display: none;
+}
+
+.tag-button {
+  padding: 8px 16px;
+  border-radius: 20px;
+  background-color: #fff;
+  color: #d94f30;
+  font-weight: bold;
+  font-size: 0.9em;
+  border: 2px solid #f3b664;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
+}
+
+.tag-button:hover {
+  background-color: #ffd3a1;
+  transform: scale(1.05);
+}
+
+.tag-checkbox:checked + .tag-button {
+  background-color: #ff914d;
+  color: white;
+  border-color: #ff6f1d;
+}
+
+.tag-labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.tag-label {
+  background-color: #ffe3ca;
+  color: #d94f30;
+  font-size: 0.8em;
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid #f3b664;
+  font-weight: bold;
 }
 
 /*いいね*/
@@ -339,14 +401,8 @@ input[disabled] {
 /*ユーザーページ*/
 .user-profile {
   padding: 40px 20px;
-  max-width: 800px;
+  width: 600px;
   margin: 0 auto;
-}
-
-.user-profile h1 {
-  font-size: 1.8em;
-  color: #d94f30;
-  margin-bottom: 20px;
 }
 
 .user-stats {
@@ -365,7 +421,7 @@ input[disabled] {
 }
 
 .user-post-card {
-  background-color: #fff7e6;
+  background-color: #fffaf3;
   border: 1px solid #f3b664;
   border-radius: 10px;
   padding: 15px;

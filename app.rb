@@ -81,6 +81,7 @@ post '/delete_item/:index' do
 end
 
 post '/post_content' do
+    puts "🎯 tag_ids: #{params[:tag_ids].inspect}"
     if session[:items]
         post = Post.create(
             title: params[:title],
@@ -90,7 +91,7 @@ post '/post_content' do
         
         tag_ids = params[:tag_ids] || []
         tag_ids.each do |tag_id|
-          PostsTag.create(post_id: post.id, tag_id: tag_id)
+            PostsTag.create(post_id: post.id.to_i, tag_id: tag_id.to_i)
         end
 
         session[:items].each do |item_data|

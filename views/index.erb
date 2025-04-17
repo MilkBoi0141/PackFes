@@ -1,6 +1,6 @@
 <section class="center-vertical">
   <form action="/search" method="get" class="search-form">
-    <input type="text" name="q" placeholder="投稿を検索..." required>
+    <input type="text" name="q" placeholder="投稿を検索" required>
     <input type="submit" value="検索">
   </form>
   <% if @posts.any? %>
@@ -9,9 +9,16 @@
       <div class="post center-vertical">
         <h3><%= post.title %></h3>
         <p><%= post.detail %></p>
+        <% if post.tags.any? %>
+          <div class="tag-labels">
+            <% post.tags.each do |tag| %>
+              <span class="tag-label"><%= tag.name %></span>
+            <% end %>
+          </div>
+        <% end %>
         <% if post.items.any? %>
           <div class="items">
-            <h4>アイテム一覧</h4>
+            <h4>アイテム</h4>
             <div class="item-grid">
               <% post.items.each do |item| %>
                 <div class="item-card">
