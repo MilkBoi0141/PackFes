@@ -1,5 +1,12 @@
 <section class="user-profile">
   <h1>ようこそ、<%= @user.name %> さん！</h1>
+  <% if @user.tags.any? %>
+    <div class="tag-labels">
+      <% @user.tags.each do |tag| %>
+        <span class="tag-label"><%= tag.name %></span>
+      <% end %>
+    </div>
+  <% end %>
 
   <div class="user-stats">
     <p>いいねした投稿数：<%= @liked_posts.count %> 件</p>

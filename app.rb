@@ -19,7 +19,30 @@ before do
 end
 
 get '/' do
-  @posts = Post.order(created_at: :desc)
+  if session[:user_id]
+    current_user = User.find(session[:user_id])
+    user_tag_ids = current_user.tags.pluck(:id)
+
+    @posts = Post
+      .left_joins(:posts_tags)
+      .left_joins(:likes)
+      .select("posts.*, 
+               COUNT(DISTINCT CASE WHEN posts_tags.tag_id IN (#{user_tag_ids.join(',')}) THEN posts_tags.tag_id END) AS tag_match_count, 
+               COUNT(DISTINCT likes.id) AS likes_count")
+      .group("posts.id")
+      .order("tag_match_count DESC, likes_count DESC")
+      .includes(:tags, :items, :likes, :mylists)
+
+
+  else
+    @posts = Post
+      .left_joins(:likes)
+      .group('posts.id')
+      .select('posts.*, COUNT(likes.id) AS likes_count')
+      .order('likes_count DESC')
+      .includes(:tags, :items, :likes, :mylists)
+  end
+
   erb :index
 end
 
@@ -36,6 +59,11 @@ post '/signup' do
     )
     
     if @user.persisted?
+        tag_ids = params[:tag_ids] || []
+        tag_ids.each do |tag_id|
+            UsersTag.create(user_id: @user.id, tag_id: tag_id)
+        end
+        
         session[:user_id] = @user.id
         session[:user_name] = @user.name
         redirect '/'
@@ -91,7 +119,7 @@ post '/post_content' do
         
         tag_ids = params[:tag_ids] || []
         tag_ids.each do |tag_id|
-            PostsTag.create(post_id: post.id.to_i, tag_id: tag_id.to_i)
+            PostsTag.create(post_id: post.id, tag_id: tag_id)
         end
 
         session[:items].each do |item_data|

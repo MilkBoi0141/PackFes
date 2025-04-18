@@ -6,6 +6,17 @@
       <input type="text" name="email" placeholder="メールアドレス" required>
       <input type="password" name="password" placeholder="パスワード" required>
       <input type="password" name="password_confirmation" placeholder="パスワードを確認" required>
+      
+      <h4>ジャンル選択</h4>
+      <div class="tag-select-group">
+        <% Tag.all.each do |tag| %>
+          <input type="checkbox" name="tag_ids[]" value="<%= tag.id %>" id="tag_<%= tag.id %>" class="tag-checkbox">
+          <label for="tag_<%= tag.id %>" class="tag-button">
+            <%= tag.name %>
+          </label>
+        <% end %>
+      </div>
+      
       <input type="submit" value="Sign up">
     </form>
     <p>アカウントをお持ちの方は <a href="/signin">こちら</a></p>
