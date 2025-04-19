@@ -1,12 +1,27 @@
+require 'active_record'
 require "logger"
 require "bundler/setup"
 Bundler.require
 require "sinatra/reloader" if development?
 require "./models.rb"
 
-enable :sessions
+ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'])
 
-use Rack::Session::Cookie, expire_after: 300
+if Tag.count == 0
+  tag_names = ["ロック", "ポップ", "アイドル", "EDM", "フェス飯", "雨対策"]
+  tag_names.each do |name|
+    Tag.find_or_create_by(name: name)
+  end
+end
+
+enable :sessions
+use Rack::Session::Cookie,
+  key: 'rack.session',
+  path: '/',
+  expire_after: 86400,
+  secret: ENV['SESSION_SECRET'] || 'fallback_secret',
+  same_site: :lax,
+  secure: production?
 
 helpers do
     def logged_in?
@@ -22,6 +37,7 @@ get '/' do
   if session[:user_id]
     current_user = User.find(session[:user_id])
     user_tag_ids = current_user.tags.pluck(:id)
+    user_tag_ids = [0] if user_tag_ids.empty?
 
     @posts = Post
       .left_joins(:posts_tags)
